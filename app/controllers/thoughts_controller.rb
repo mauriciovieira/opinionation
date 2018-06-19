@@ -25,7 +25,7 @@ class ThoughtsController < ApplicationController
   # POST /thoughts.json
   def create
     @thought = Thought.new(thought_params)
-
+    @thought.user = current_user
     respond_to do |format|
       if @thought.save
         format.html { redirect_to @thought, notice: 'Thought was successfully created.' }
