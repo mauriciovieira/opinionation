@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  emotionable: one
+  emotionable_type: Emotionable
+  user: one
+  emoji: 1
+
+two:
+  emotionable: two
+  emotionable_type: Emotionable
+  user: two
+  emoji: 1

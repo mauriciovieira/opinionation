@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180620040555) do
+ActiveRecord::Schema.define(version: 20180620050442) do
 
   create_table "comments", force: :cascade do |t|
     t.string "title", limit: 50, default: ""
@@ -24,6 +24,17 @@ ActiveRecord::Schema.define(version: 20180620040555) do
     t.index ["commentable_id"], name: "index_comments_on_commentable_id"
     t.index ["commentable_type"], name: "index_comments_on_commentable_type"
     t.index ["user_id"], name: "index_comments_on_user_id"
+  end
+
+  create_table "emotions", force: :cascade do |t|
+    t.string "emotionable_type"
+    t.integer "emotionable_id"
+    t.integer "user_id"
+    t.integer "emoji"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["emotionable_type", "emotionable_id"], name: "index_emotions_on_emotionable_type_and_emotionable_id"
+    t.index ["user_id"], name: "index_emotions_on_user_id"
   end
 
   create_table "thoughts", force: :cascade do |t|
