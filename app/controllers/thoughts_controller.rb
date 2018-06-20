@@ -10,6 +10,7 @@ class ThoughtsController < ApplicationController
   # GET /thoughts/1
   # GET /thoughts/1.json
   def show
+    @observations = @thought.comments.recent
   end
 
   # GET /thoughts/new
