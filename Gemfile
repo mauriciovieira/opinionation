@@ -24,6 +24,8 @@ gem 'devise-bootstrapped'
 
 gem 'acts_as_commentable'
 
+gem 'emoji'
+
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   gem 'capybara', '~> 2.13'
