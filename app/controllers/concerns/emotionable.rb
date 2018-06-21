@@ -1,5 +1,5 @@
 module Emotionable
-  extends ActiveSupport::Concern
+  extend ActiveSupport::Concern
 
   included do
     has_many :emotions, as: :emotionable
@@ -9,7 +9,7 @@ module Emotionable
     Emotion.create(emotionable: self, user: current_user, emoji: emoji)
   end
 
-  def has_emotion?(curent_user)
+  def has_emotion?(current_user)
     set_emotion(current_user)
     @emotion.present? ? @emotion : false
   end
