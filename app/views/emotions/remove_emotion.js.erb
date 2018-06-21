@@ -1,0 +1,20 @@
+alert('remove_emotion.js.erb');
+
+$('#t-like').attr({
+  href:"/emotion/<%= @emotionable.class.name %>/<%= @emotionable.id %>/like"
+});
+$('#t-love').attr({
+  href:"/emotion/<%= @emotionable.class.name %>/<%= @emotionable.id %>/love"
+});
+$('#t-haha').attr({
+  href:"/emotion/<%= @emotionable.class.name %>/<%= @emotionable.id %>/haha"
+});
+$('#t-wow').attr({
+  href:"/emotion/<%= @emotionable.class.name %>/<%= @emotionable.id %>/wow"
+});
+$('#t-sad').attr({
+  href:"/emotion/<%= @emotionable.class.name %>/<%= @emotionable.id %>/sad"
+});
+$('#t-angry').attr({
+  href:"/emotion/<%= @emotionable.class.name %>/<%= @emotionable.id %>/angry"
+});

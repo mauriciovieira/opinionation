@@ -1,0 +1,53 @@
+$('#t-like').attr({
+  href:"/emotion/<%= @emotionable.class.name %>/<%= @emotionable.id %>/like"
+});
+$('#t-love').attr({
+  href:"/emotion/<%= @emotionable.class.name %>/<%= @emotionable.id %>/love"
+});
+$('#t-haha').attr({
+  href:"/emotion/<%= @emotionable.class.name %>/<%= @emotionable.id %>/haha"
+});
+$('#t-wow').attr({
+  href:"/emotion/<%= @emotionable.class.name %>/<%= @emotionable.id %>/wow"
+});
+$('#t-sad').attr({
+  href:"/emotion/<%= @emotionable.class.name %>/<%= @emotionable.id %>/sad"
+});
+$('#t-angry').attr({
+  href:"/emotion/<%= @emotionable.class.name %>/<%= @emotionable.id %>/angry"
+});
+
+<% if @emotionable.has_emotion?(current_user) %>
+  switch("<%= @emotionable.has_emotion?(current_user).emoji %>") {
+  case 'like':
+    $('#t-like').attr({ href:"/emotion-delete/<%= @emotionable.class.name %>/<%=@emotionable.id %>",
+    class:"btn btn-info btn-circle btn-lg"
+  });
+  break;
+  case 'love':
+    $('#t-love').attr({ href:"/emotion-delete/<%= @emotionable.class.name %>/<%=@emotionable.id %>",
+    class:"btn btn-danger btn-circle btn-lg"
+  });
+  break;
+  case 'haha':
+    $('#t-haha').attr({ href:"/emotion-delete/<%= @emotionable.class.name %>/<%=@emotionable.id %>",
+    class:"btn btn-warning btn-circle btn-lg"
+  });
+  break;
+  case 'wow':
+    $('#t-wow').attr({ href:"/emotion-delete/<%= @emotionable.class.name %>/<%=@emotionable.id %>",
+    class:"btn btn-info btn-circle btn-lg"
+  });
+  break;
+  case 'sad':
+    $('#t-sad').attr({ href:"/emotion-delete/<%= @emotionable.class.name %>/<%=@emotionable.id %>",
+    class:"btn btn-danger btn-circle btn-lg"
+  });
+  break;
+  case 'angry':
+    $('#t-angry').attr({ href:"/emotion-delete/<%= @emotionable.class.name %>/<%=@emotionable.id %>",
+    class:"btn btn-warning btn-circle btn-lg"
+  });
+  break;
+}
+<% end %>
