@@ -1,23 +1,115 @@
-<%- model_class = Thought -%>
-<div class="page-header">
-  <h1><%=t '.title', :default => model_class.model_name.human.titleize %></h1>
+<div class="container">
+  <div class="page-header">
+    <div class="row">
+      <div class="col-lg-8">
+        <h1><%= @thought.title %></h1>
+      </div>
+      <div class="col-lg-4 text-right">
+        <%= link_to t('.back', :default => t("helpers.links.back")),
+                      thoughts_path, :class => 'btn btn-default'  %>
+        <% if @thought.user == current_user %>
+          <%= link_to t('.edit', :default => t("helpers.links.edit")),
+                        edit_thought_path(@thought), :class => 'btn btn-default' %>
+          <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+                        thought_path(@thought),
+                        :method => 'delete',
+                        :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+                        :class => 'btn btn-danger' %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-lg-8">
+      <blockquote>
+        <p><%= @thought.body %></p>
+        <footer>written by <cite title="Source Title"><%= @thought.user.email %></cite></footer>
+      </blockquote>
+      <p>
+        <div id="comment-emotion">
+          <%= link_to "/emotion/#{@thought.class.name}/#{@thought.id}/like", id:"t-like", title:"like", class:"btn btn-default btn-circle btn-lg", remote:true do %>
+            <i class="glyphicon glyphicon-thumbs-up"></i>
+          <% end %>
+          <%= link_to "/emotion/#{@thought.class.name}/#{@thought.id}/love", id:"t-love", title:"love", class:"btn btn-default btn-circle btn-lg", remote:true do %>
+            <i class="glyphicon glyphicon-heart"></i>
+          <% end %>
+          <%= link_to "/emotion/#{@thought.class.name}/#{@thought.id}/haha", id:"t-haha", title:"haha", class:"btn btn-default btn-circle btn-lg", remote:true do %>
+            <i class="glyphicon glyphicon-thumbs-down"></i>
+          <% end %>
+          <%= link_to "/emotion/#{@thought.class.name}/#{@thought.id}/wow", id:"t-wow", title:"wow", class:"btn btn-default btn-circle btn-lg", remote:true do %>
+            <i class="glyphicon glyphicon-thumbs-up"></i>
+          <% end %>
+          <%= link_to "/emotion/#{@thought.class.name}/#{@thought.id}/sad", id:"t-sad", title:"sad", class:"btn btn-default btn-circle btn-lg", remote:true do %>
+            <i class="glyphicon glyphicon-heart"></i>
+          <% end %>
+          <%= link_to "/emotion/#{@thought.class.name}/#{@thought.id}/angry", id:"t-angry", title:"angry", class:"btn btn-default btn-circle btn-lg", remote:true do %>
+            <i class="glyphicon glyphicon-thumbs-down"></i>
+          <% end %>
+        </div>
+      </p>
+    </div>
+  </div>
+  <hr />
+  <div class="container">
+    <%= form_with url: create_observation_path(@thought.id), local: true, class:"row form-inline margin-bottom" do |form| %>
+      <div class="col-md-6">
+        <%= form.text_area :comment, class:"form-control", style:"min-width:100%;", rows:"3"%>
+      </div>
+      <div class="col-md-2 align-right">
+        <button type="submit" class="btn btn-info">leave an observation</button>
+      </div>
+    <% end %>
+  </div>
+  <h3>Observations(<%= @observations.length %>)</h3>
+  <% if @observations.length > 0 %>
+    <% @observations.each do |observation| %>
+      <div class="row">
+        <div class="col-md-8">
+          <div class="panel panel-default">
+            <div class="panel-body">
+              <p><strong><%= observation.user.email %>:</strong>
+              <p><%= observation.comment %></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  <% end %>
 </div>
 
-<dl class="dl-horizontal">
-  <dt><strong><%= model_class.human_attribute_name(:title) %>:</strong></dt>
-  <dd><%= @thought.title %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:body) %>:</strong></dt>
-  <dd><%= @thought.body %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:user_id) %>:</strong></dt>
-  <dd><%= @thought.user_id %></dd>
-</dl>
-
-<%= link_to t('.back', :default => t("helpers.links.back")),
-              thoughts_path, :class => 'btn btn-default'  %>
-<%= link_to t('.edit', :default => t("helpers.links.edit")),
-              edit_thought_path(@thought), :class => 'btn btn-default' %>
-<%= link_to t('.destroy', :default => t("helpers.links.destroy")),
-              thought_path(@thought),
-              :method => 'delete',
-              :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
-              :class => 'btn btn-danger' %>
+<script>
+<% if @thought.has_emotion?(current_user) %>
+  switch("<%= @thought.has_emotion?(current_user).emoji %>") {
+    case 'like':
+      $('#t-like').attr({ href:"/emotion-delete/<%= @thought.class.name %>/<%=@thought.id %>",
+      class:"btn btn-info btn-circle btn-lg"
+    });
+    break;
+    case 'love':
+      $('#t-love').attr({ href:"/emotion-delete/<%= @thought.class.name %>/<%=@thought.id %>",
+      class:"btn btn-danger btn-circle btn-lg"
+    });
+    break;
+    case 'haha':
+      $('#t-haha').attr({ href:"/emotion-delete/<%= @thought.class.name %>/<%=@thought.id %>",
+      class:"btn btn-warning btn-circle btn-lg"
+    });
+    break;
+    case 'wow':
+      $('#t-wow').attr({ href:"/emotion-delete/<%= @thought.class.name %>/<%=@thought.id %>",
+      class:"btn btn-info btn-circle btn-lg"
+    });
+    break;
+    case 'sad':
+      $('#t-sad').attr({ href:"/emotion-delete/<%= @thought.class.name %>/<%=@thought.id %>",
+      class:"btn btn-danger btn-circle btn-lg"
+    });
+    break;
+    case 'angry':
+      $('#t-angry').attr({ href:"/emotion-delete/<%= @thought.class.name %>/<%=@thought.id %>",
+      class:"btn btn-warning btn-circle btn-lg"
+    });
+    break;
+  }
+<% end %>
+</script>
