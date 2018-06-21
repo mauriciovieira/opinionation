@@ -28,22 +28,22 @@
       <p>
         <div id="comment-emotion">
           <%= link_to "/emotion/#{@thought.class.name}/#{@thought.id}/like", id:"t-like", title:"like", class:"btn btn-default btn-circle btn-lg", remote:true do %>
-            <i class="glyphicon glyphicon-thumbs-up"></i>
+            <i class="glyphicon"><%= image_tag(Emoji.image_url_for_name('thumbs_up_sign'), size: 30)%></i>
           <% end %>
           <%= link_to "/emotion/#{@thought.class.name}/#{@thought.id}/love", id:"t-love", title:"love", class:"btn btn-default btn-circle btn-lg", remote:true do %>
-            <i class="glyphicon glyphicon-heart"></i>
+            <i class="glyphicon"><%= image_tag(Emoji.image_url_for_name('heart'), size: 30)%></i>
           <% end %>
           <%= link_to "/emotion/#{@thought.class.name}/#{@thought.id}/haha", id:"t-haha", title:"haha", class:"btn btn-default btn-circle btn-lg", remote:true do %>
-            <i class="glyphicon glyphicon-thumbs-down"></i>
+            <i class="glyphicon"><%= image_tag(Emoji.image_url_for_name('smiley_stuck_out_tongue_winking_eye'), size: 30)%></i>
           <% end %>
           <%= link_to "/emotion/#{@thought.class.name}/#{@thought.id}/wow", id:"t-wow", title:"wow", class:"btn btn-default btn-circle btn-lg", remote:true do %>
-            <i class="glyphicon glyphicon-thumbs-up"></i>
+            <i class="glyphicon"><%= image_tag(Emoji.image_url_for_name('open_mouth'), size: 30)%></i>
           <% end %>
           <%= link_to "/emotion/#{@thought.class.name}/#{@thought.id}/sad", id:"t-sad", title:"sad", class:"btn btn-default btn-circle btn-lg", remote:true do %>
-            <i class="glyphicon glyphicon-heart"></i>
+            <i class="glyphicon"><%= image_tag(Emoji.image_url_for_name('pensive_face'), size: 30)%></i>
           <% end %>
           <%= link_to "/emotion/#{@thought.class.name}/#{@thought.id}/angry", id:"t-angry", title:"angry", class:"btn btn-default btn-circle btn-lg", remote:true do %>
-            <i class="glyphicon glyphicon-thumbs-down"></i>
+            <i class="glyphicon"><%= image_tag(Emoji.image_url_for_name('pouting_face'), size: 30)%></i>
           <% end %>
         </div>
       </p>
