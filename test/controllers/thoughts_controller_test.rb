@@ -1,4 +1,4 @@
-require 'test_helper'
+require "test_helper"
 
 class ThoughtsControllerTest < ActionDispatch::IntegrationTest
   setup do
@@ -16,8 +16,8 @@ class ThoughtsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should create thought" do
-    assert_difference('Thought.count') do
-      post thoughts_url, params: { thought: { body: @thought.body, title: @thought.title, user_id: @thought.user_id } }
+    assert_difference("Thought.count") do
+      post thoughts_url, params: {thought: {body: @thought.body, title: @thought.title, user_id: @thought.user_id}}
     end
 
     assert_redirected_to thought_url(Thought.last)
@@ -34,12 +34,12 @@ class ThoughtsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update thought" do
-    patch thought_url(@thought), params: { thought: { body: @thought.body, title: @thought.title, user_id: @thought.user_id } }
+    patch thought_url(@thought), params: {thought: {body: @thought.body, title: @thought.title, user_id: @thought.user_id}}
     assert_redirected_to thought_url(@thought)
   end
 
   test "should destroy thought" do
-    assert_difference('Thought.count', -1) do
+    assert_difference("Thought.count", -1) do
       delete thought_url(@thought)
     end
 

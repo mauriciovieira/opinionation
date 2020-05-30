@@ -25,6 +25,7 @@ module Emotionable
   end
 
   private
+
   def set_emotion(current_user)
     @emotion = Emotion.find_by(emotionable: self, user: current_user)
   end
